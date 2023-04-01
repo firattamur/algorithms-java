@@ -2,6 +2,9 @@ package org.firattamur.datastructures;
 
 import org.junit.Test;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public class StackTest {
 
     /**
@@ -14,7 +17,8 @@ public class StackTest {
 
         stack.push(expectedPeek);
 
-        assert stack.peek() == expectedPeek;
+        assert stack.peek().isPresent();
+        assert stack.peek().get() == expectedPeek;
     }
 
     /**
@@ -23,12 +27,13 @@ public class StackTest {
     @Test
     public void testStackPop() {
         Stack<Integer> stack = new Stack<>();
-        int expectedPop = 1;
+        Integer expectedPop = 1;
 
         stack.push(1);
-        int pop = stack.pop();
+        Optional<Integer> pop = stack.pop();
 
-        assert pop == expectedPop;
+        assert pop.isPresent();
+        assert Objects.equals(pop.get(), expectedPop);
     }
 
     /**
@@ -42,7 +47,8 @@ public class StackTest {
 
         stack.push(expectedPeek);
 
-        assert stack.peek() == expectedPeek;
+        assert stack.peek().isPresent();
+        assert stack.peek().get() == expectedPeek;
     }
 
     /**
@@ -55,7 +61,7 @@ public class StackTest {
 
         // No Act
 
-        assert stack.peek() == null;
+        assert stack.peek().isEmpty();
     }
 
     /**
